@@ -1,0 +1,33 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser->>server: POST https://fullstack-exampleapp.herokuapp.com/new_note
+    activate server
+    Note right of browser: Data submitted in the network tab: note: test
+    server-->>browser: 201 created
+    deactivate server
+
+    browser->>server: GET https://fullstack-exampleapp.herokuapp.com/notes
+    activate server
+    server-->>browser: HTML document (notes page)
+    deactivate server
+
+    browser->>server: GET https://fullstack-exampleapp.herokuapp.com/main.css
+    activate server
+    server-->>browser: the CSS file
+    deactivate server
+
+    browser->>server: GET https://fullstack-exampleapp.herokuapp.com/main.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+
+    Note right of browser: browser starts executing js-code that requests JSON data from server
+
+    browser->>server: GET https://fullstack-exampleapp.herokuapp.com/data.json
+    activate server
+    server-->>browser: [{ "content": "test", "date": "2019-05-23"}, ...]
+    deactivate server
+
+    Note right of browser: browser executes the event handler that renders notes to display
